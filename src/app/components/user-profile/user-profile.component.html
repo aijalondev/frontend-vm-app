@@ -1,0 +1,32 @@
+<div class="user-profile-container">
+    <div *ngIf="loading">
+        <p>Carregando informações do usuário...</p>
+    </div>
+    <div *ngIf="!loading && userDetails && !isEditing">
+        <h2>Perfil do Usuário</h2>
+        <p><strong>Nome:</strong> {{ userDetails.name }}</p>
+        <p><strong>Email:</strong> {{ userDetails.email }}</p>
+        <p><strong>Role:</strong> {{ userDetails.role }}</p>
+        <button class="btn btn-secondary edit-button" (click)="startEdit()">Editar Perfil</button>
+    </div>
+
+    <form *ngIf="!loading && userDetails && isEditing" (ngSubmit)="updateUserProfile()" #profileForm="ngForm">
+        <h2>Editar Perfil</h2>
+        <div>
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" [(ngModel)]="userDetails.name" required class="input-field">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="userDetails.email" required class="input-field">
+        </div>
+        <div class="btns-update">
+            <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Salvar</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancelar</button>
+        </div>
+    </form>
+
+    <div *ngIf="!loading && !userDetails">
+        <p>Nenhum detalhe de usuário encontrado.</p>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="register-container">
+  <h2>Cadastrar</h2>
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <div>
+      <label for="name">Nome:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="name" required class="input-field" #nameInput="ngModel">
+      <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched || registerForm.submitted)" class="error-message">
+        Nome é obrigatório.
+      </div>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="email" required class="input-field" #emailInput="ngModel">
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched || registerForm.submitted)" class="error-message">
+        Email é obrigatório.
+      </div>
+    </div>
+    <div>
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required minlength="6" class="input-field" #passwordInput="ngModel">
+      <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched || registerForm.submitted)">
+        <div *ngIf="passwordInput.errors?.['required']" class="error-message">Senha é obrigatória.</div>
+        <div *ngIf="passwordInput.errors?.['minlength']" class="error-message">Senha deve ter no mínimo 6 caracteres.</div>
+      </div>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirmar Senha:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required [class.input-field-error]="password !== confirmPassword" class="input-field" #confirmPasswordInput="ngModel">
+      <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched || registerForm.submitted)">
+        <div *ngIf="confirmPasswordInput.errors?.['required']" class="error-message">Confirmação de senha é obrigatória.</div>
+      </div>
+      <div *ngIf="password !== confirmPassword && (confirmPasswordInput.dirty || confirmPasswordInput.touched || registerForm.submitted)" class="error-message">
+        As senhas não coincidem.
+      </div>
+    </div>
+    <div>
+      <label for="role">Perfil:</label>
+      <select id="role" name="role" [(ngModel)]="role" required class="input-field" #roleInput="ngModel">
+        <option value="">Selecione o perfil</option>
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
+      </select>
+      <div *ngIf="roleInput.invalid && (roleInput.dirty || roleInput.touched || registerForm.submitted)" class="error-message">
+        Role é obrigatório.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || password !== confirmPassword">Cadastrar</button>
+  </form>
+  <div class="auth-switch">
+    Já tem uma conta? <a routerLink="/login">Faça Login</a>
+  </div>
+</div>

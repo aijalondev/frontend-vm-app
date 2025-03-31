@@ -1,0 +1,6 @@
+services:
+  web:
+    image: frontend-vm-app
+    ports:
+      - "4200:4200"
+    restart: always

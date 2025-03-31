@@ -1,0 +1,25 @@
+<div class="modal">
+    <div class="modal-content">
+        <h2>Editar Usuário</h2>
+        <form (ngSubmit)="onUpdate()">
+            <div>
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" [(ngModel)]="updatedUser.name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" [(ngModel)]="updatedUser.email" required>
+            </div>
+            <div>
+                <label for="role">Perfil:</label>
+                <select id="role" name="role" [(ngModel)]="updatedUser.role">
+                    <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                </select>
+            </div>
+            <div class="actions">
+                <button type="button" (click)="onClose()">Cancelar</button>
+                <button type="submit" (click)="onUpdate()">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>

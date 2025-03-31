@@ -1,0 +1,57 @@
+<div class="user-list-container">
+    <h2>Lista de Usuários</h2>
+
+    <div class="filter-container">
+        <input type="text" placeholder="Filtrar por nome" [(ngModel)]="filterName">
+        <button class="btn btn-secondary" (click)="clearFilter()">Limpar Filtro</button>
+        <button class="btn btn-primary" (click)="applyFilter()">Pesquisar</button>
+    </div>
+
+    <div *ngIf="users.length === 0; else userTable">
+        <p>Nenhum usuário encontrado.</p>
+    </div>
+
+    <ng-template #userTable>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>
+                        <button (click)="openUserUpdateModal(user)"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button (click)="deleteUser(user)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>
+
+    <div *ngIf="totalPages > 1" class="pagination-controls">
+        <button (click)="changePage(1)" [disabled]="currentPage === 1"
+            aria-label="Ir para a primeira página">Primeira</button>
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
+            aria-label="Ir para a página anterior">Anterior</button>
+
+        <button *ngFor="let pageNumber of getPageNumbers()" (click)="changePage(pageNumber)"
+            [class.active]="currentPage === pageNumber" [attr.aria-label]="'Ir para a página ' + pageNumber"
+            [attr.aria-current]="currentPage === pageNumber ? 'page' : null">
+            {{ pageNumber }}
+        </button>
+
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages"
+            aria-label="Ir para a próxima página">Próxima</button>
+        <button (click)="changePage(totalPages - 1)" [disabled]="currentPage === totalPages"
+            aria-label="Ir para a última página">Última</button>
+    </div>
+
+    <app-user-update-modal *ngIf="selectedUserToUpdate" [user]="selectedUserToUpdate"
+        (close)="selectedUserToUpdate = null" (update)="updateUser($event)"></app-user-update-modal>

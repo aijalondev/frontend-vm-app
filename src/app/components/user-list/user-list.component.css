@@ -1,0 +1,163 @@
+.user-list-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.user-list-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.user-list-container p {
+    text-align: center;
+    color: #777;
+}
+
+.user-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.user-list-container th,
+.user-list-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-list-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.user-list-container tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.user-list-container tbody tr:hover {
+    background-color: #e0f2f7;
+}
+
+.user-list-container tbody button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.user-list-container tbody button:first-child {
+    background-color: #007bff;
+    color: white;
+}
+
+.user-list-container tbody button:first-child:hover {
+    background-color: #0056b3;
+}
+
+.user-list-container tbody button:last-child {
+    background-color: #dc3545;
+    color: white;
+}
+
+.user-list-container tbody button:last-child:hover {
+    background-color: #c82333;
+}
+
+.user-list-container .pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.user-list-container .pagination-controls button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.user-list-container .pagination-controls button:hover:enabled {
+    background-color: #007bff;
+    color: white;
+}
+
+.user-list-container .pagination-controls button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.user-list-container .pagination-controls button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-container input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.filter-container button.btn-primary,
+.filter-container button.btn-secondary {
+    margin-top: 0;
+    padding: 10px;
+}
+
+.filter-container button.btn-primary:hover {
+    background-color: #d6b015;
+}
+
+.filter-container button.btn-secondary {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .user-list-container {
+        padding: 20px;
+    }
+
+    .user-list-container table {
+        overflow-x: auto;
+        display: block;
+    }
+
+    .user-list-container th,
+    .user-list-container td {
+        white-space: nowrap;
+    }
+
+    .user-list-container .pagination-controls {
+        flex-wrap: wrap;
+    }
+
+    .user-list-container .pagination-controls button {
+        margin: 5px;
+    }
+}
