@@ -1,59 +1,111 @@
-# FrontendVmApp
+# Projeto Frontend VM Tecnologia a Nayax Company
+![Logo da VM Tecnologia](https://static.wixstatic.com/media/31e6f4_c384784ebd564c69bd34872c89331c55~mv2.png/v1/fill/w_241,h_55,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo%20inteira%201.png)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+Este projeto é a interface de usuário web para a API Rest da VM Tecnologia a Nayax Company.
 
-## Development server
+## Visão Geral
 
-To start a local development server, run:
+O frontend é desenvolvido utilizando Angular e permite aos usuários interagir com os recursos da API, como gerenciamento de usuários e autenticação.
 
-```bash
-ng serve
-```
+## Tecnologias Utilizadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* **Framework:** Angular 19
+* **Gerenciamento de Pacotes:** npm
+* **Containerização:** Docker
 
-## Code scaffolding
+## Pré-requisitos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Antes de começar, você precisará ter instalado em sua máquina:
 
-```bash
-ng generate component component-name
-```
+* **Docker:** Certifique-se de ter o Docker instalado. Você pode baixá-lo em [https://www.docker.com/get-started](https://www.docker.com/get-started).
+* **Git:** Necessário para clonar o repositório do projeto. Você pode baixá-lo em [https://git-scm.com/downloads](https://git-scm.com/downloads).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Como Rodar a Aplicação com Docker
 
-```bash
-ng generate --help
-```
+A maneira mais fácil e recomendada de rodar esta aplicação frontend é utilizando o Docker. Siga os passos abaixo:
 
-## Building
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/aijalondev/frontend-vm-app.git
+    cd frontend-vm-app
+    ```
+    **Observação:** Certifique-se de que o Git esteja instalado e configurado corretamente em seu sistema para que o comando `git clone` funcione.
 
-To build the project run:
+2.  **Construa a imagem Docker da aplicação:**
+    ```bash
+    docker build -t frontend-vm-app .
+    ```
+    Este comando irá construir a imagem Docker para a aplicação frontend com base no Dockerfile presente no diretório do projeto.
 
-```bash
-ng build
-```
+3.  **Execute o container Docker:**
+    ```bash
+    docker run -p 80:80 frontend-vm-app
+    ```
+    Este comando irá executar o container Docker da aplicação frontend. A flag `-p 80:80` mapeia a porta 80 do container para a porta 80 da sua máquina local, tornando a aplicação acessível no seu navegador.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+4.  **Acesse a Aplicação:**
+    Após a execução do comando acima, a aplicação frontend estará disponível no seu navegador em [http://localhost](http://localhost).
 
-## Running unit tests
+## Rotas da Aplicação
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+A tabela abaixo descreve as rotas principais da aplicação frontend:
 
-```bash
-ng test
-```
+<html>
+<body>
 
-## Running end-to-end tests
+<h2>Rotas da Aplicação Frontend</h2>
 
-For end-to-end (e2e) testing, run:
+<table>
+  <thead>
+    <tr>
+      <th>Rota</th>
+      <th>Componente</th>
+      <th>Acesso</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/login</code></td>
+      <td>LoginComponent</td>
+      <td>Público</td>
+      <td>Tela de login para os usuários inserirem suas credenciais.</td>
+    </tr>
+    <tr>
+      <td><code>/register</code></td>
+      <td>RegisterComponent</td>
+      <td>Público</td>
+      <td>Tela de registro para novos usuários criarem suas contas.</td>
+    </tr>
+    <tr>
+      <td><code>/user-list</code></td>
+      <td>UserListComponent</td>
+      <td>Requer autenticação e perfil de Admin</td>
+      <td>Lista os usuários cadastrados na plataforma (acesso restrito a admins).</td>
+    </tr>
+    <tr>
+      <td><code>/user-profile</code></td>
+      <td>UserProfileComponent</td>
+      <td>Requer autenticação</td>
+      <td>Tela para o usuário visualizar e gerenciar seu próprio perfil.</td>
+    </tr>
+    <tr>
+      <td><code>/</code></td>
+      <td>Redireciona para <code>/login</code></td>
+      <td>Público</td>
+      <td>Rota padrão que redireciona o usuário para a tela de login.</td>
+    </tr>
+  </tbody>
+</table>
 
-```bash
-ng e2e
-```
+</body>
+</html>
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**Observações sobre as rotas:**
 
-## Additional Resources
+* **`canActivate: [AuthGuard]`**: Indica que a rota requer que o usuário esteja autenticado para acessá-la. Se o usuário não estiver logado, ele será redirecionado para a tela de login.
+* **`canActivate: [AuthGuard, AdminGuard]`**: Indica que a rota requer autenticação e que o usuário autenticado deve ter o perfil de administrador para acessá-la.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Configuração da API
+
+A aplicação frontend se comunica com a API Rest da VM Tecnologia. Para informações sobre a API Rest e como configurá-la, você pode consultar o repositório da API em [https://github.com/aijalondev/api-rest-vm/](https://github.com/aijalondev/api-rest-vm/).
